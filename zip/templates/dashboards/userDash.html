@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+
+{% endblock head %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{{ rental_booking_form.media }}
+
+
+
+{% block block_body  %}
+<style>
+	.mycustom-jumbotron {
+		width: 560px;
+	}
+</style>
+<header id="header" id="home">
+	<div class="container">
+		<div class="row align-items-center justify-content-between d-flex">
+			<div id="logo">
+				<a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
+			</div>
+		</div>
+	</div>
+</header><!-- #header -->
+
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+	<div class="overlay overlay-bg"></div>
+	<div class="container">
+		<div class="row fullscreen d-flex align-items-center justify-content-center">
+			<div class="banner-content col-lg-7 col-md-6 ">
+				<h6 class="text-white ">Rental Cars for Everyone</h6>
+				<h1 class="text-white text-uppercase">
+					Cheapest Prices on Market
+				</h1>
+			</div>
+			<div class="col-lg-5  col-md-6 header-right">
+				<h4 class="text-white pb-30 text-center">Book Your Car Today!</h4>
+				<div class="jumbotron mycustom-jumbotron">
+					<form enctype="multipart/form-data" method="POST" , action=''>{% csrf_token %}
+						{{ rental_booking_form.as_p }}
+
+						{% for message in messages %}
+							{# Show Error Message #}
+							<div class="alert alert-success">
+								<a class="close" href="#" data-dismiss="alert">×</a>
+								{{ message }}
+							</div>
+						{% endfor %}
+
+						{{ rental_booking_form.media }}
+						{{rental_vehicle_form.as_p}}
+						<input type="submit" name="" value="Confirm Your Booking">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+{% endblock %}

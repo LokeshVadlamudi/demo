@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style type='text/css'>
+     .div-style{
+         margin-left: 30%;
+    margin-top : 1rem;
+    padding : 1rem;
+   background: rgb(169,210,88);
+background: linear-gradient(90deg, rgba(169,210,88,1) 10%, rgba(0,226,255,1) 99%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0.5rem 1rem 0px;
+    }
+
+    </style>
+
+{% endblock head %}
+
+
+{% block content %}
+<div class="div-style">
+    <form method="POST"> {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Save" />
+    </form>
+</div>
+{% endblock %}

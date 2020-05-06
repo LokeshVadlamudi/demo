@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock head %}
+
+
+{% block content %}
+
+ <header id="header" id="home">
+			    <div class="container">
+			    	<div class="row align-items-center justify-content-between d-flex">
+				      <div id="logo">
+				        <a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
+				      </div>
+				      <nav id="nav-menu-container">
+				        <ul class="nav-menu">
+				          <li class="menu-active"><a href="index.html">Home</a></li>
+						  <li><a href="about.html">Manage Users</a></li>
+						  <li><a href="about.html">Manage Locations</a></li>
+
+							<li><a href="contact.html">Profile</a></li>
+				          <li class="menu-has-children"><a href="">Logged In</a>
+				            <ul>
+				              <li><a href="elements.html">Log Out</a></li>
+				            </ul>
+				          </li>
+				        </ul>
+				      </nav><!-- #nav-menu-container -->
+			    	</div>
+			    </div>
+			  </header><!-- #header -->
+
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-center justify-content-center">
+						<div class="col-lg-5  col-md-6 header-right">
+							<h4 class="text-white pb-30">Assign Vehicles To Location</h4>
+							<form class="form" role="form" autocomplete="off">
+
+								<div class="from-group">
+							    	<input class="form-control txt-field" type="text" name="name" placeholder="Vehicle Model Name">
+							    	<input class="form-control txt-field" type="email" name="email" placeholder="$ Hourly Price (optional)">
+								</div>
+								<div class="form-group">
+							       	<div class="default-select" id="default-select"">
+										<select>
+											<option value="" disabled selected hidden>Select Location</option>
+											<option value="1">San Jose</option>
+											<option value="1">San Francisco</option>
+											<option value="1">Los Angeles</option>
+										</select>
+									</div>
+							    </div>
+
+
+							    <div class="form-group row">
+							        <div class="col-md-12">
+							            <button type="reset" class="btn btn-default btn-lg btn-block text-center text-uppercase">ASSIGN VEHICLE</button>
+							        </div>
+							    </div>
+							</form>
+						</div>
+
+					<div class="col-lg-1"></div>
+
+
+						<!--right box-->
+						<div class="col-lg-5  col-md-6 header-right">
+							<h4 class="text-white pb-30">Add New Vehicle</h4>
+							<form class="form" role="form" autocomplete="off">
+							    <div class="form-group">
+							       	<div class="default-select" id="default-select"">
+										<select>
+											<option value="" disabled selected hidden>Select Vehicle Type</option>
+											<option value="1">Car</option>
+											<option value="1">Pickup Truck</option>
+											<option value="1">Van</option>
+										</select>
+									</div>
+								</div>
+								<div class="from-group">
+							    	<input class="form-control txt-field" type="text" name="name" placeholder="Vehicle Model Name">
+							    	<input class="form-control txt-field" type="email" name="email" placeholder="$ Hourly Price">
+							    	<!-- <input class="form-control txt-field" type="tel" name="phone" placeholder="Phone number"> -->
+							    </div>
+									<!-- <div class="form-group">
+							       	<div class="default-select" id="default-select"">
+										<select>
+											<option value="" disabled selected hidden>Select Your Pickup Location</option>
+											<option value="1">San Jose</option>
+											<option value="1">San Francisco</option>
+											<option value="1">Los Angeles</option>
+										</select>
+									</div>
+							    </div> -->
+
+							    <div class="form-group row">
+							        <div class="col-md-12">
+							            <button type="reset" class="btn btn-default btn-lg btn-block text-center text-uppercase">ADD VEHICLE</button>
+							        </div>
+							    </div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->
+
+
+
+
+{% endblock content %}

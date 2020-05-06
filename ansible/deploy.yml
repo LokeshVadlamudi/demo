@@ -1,0 +1,84 @@
+---
+
+- name: Deploy Playbook
+  hosts: all
+  tasks:
+
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+
+    - name: Install gunicorn
+      become: true
+      apt:
+        name: gunicorn3
+        state: present
+
+    - name: Install supervisor
+      become: true
+      apt:
+        name: supervisor
+        state: present
+
+    - name: Install nginx
+      become: true
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure Pip is installed.
+      become: true
+      package:
+        name: python3-pip
+        state: present
+
+    - name: Install specified python requirements
+      become: true
+      pip:
+        executable: pip3
+        requirements: /home/ubuntu/sp20-cmpe-202-sec-49-team-project-fourreal/requirements.txt
+
+    - name: Copy gunicorn.conf to the appropriate location
+      become: yes
+      copy:
+        src: /home/ubuntu/sp20-cmpe-202-sec-49-team-project-fourreal/conf.d/gunicorn.conf
+        #src: ../conf.d/gunicorn.conf
+        dest: /etc/supervisor/conf.d
+        remote_src: yes
+
+    - name: Copy django.conf (nginx) to sites-enabled
+      become: yes
+      copy:
+        src: /home/ubuntu/sp20-cmpe-202-sec-49-team-project-fourreal/conf.d/django.conf
+        #src: ../conf.d/django.conf
+        dest: /etc/nginx/sites-available
+        remote_src: yes
+
+    - name: Copy nginx.conf (nginx) to main location
+      become: yes
+      copy:
+        src: /home/ubuntu/sp20-cmpe-202-sec-49-team-project-fourreal/conf.d/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        remote_src: yes
+
+    - name: Create a symbolic link for django.conf
+      become: yes
+      file:
+        src: /etc/nginx/sites-available/django.conf
+        dest: /etc/nginx/sites-enabled/django.conf
+        state: link
+
+    - name: Reread the supervisor configuration
+      become: yes
+      shell: supervisorctl reread
+
+    - name: Update the supervisor configuration
+      become: yes
+      shell: supervisorctl update
+
+    - name: Reload nginx configuration
+      become: yes
+      shell: nginx -s reload

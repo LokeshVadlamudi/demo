@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="/user_search" method="GET">
+        <input type="text" name='user_search' placeholder="search first name">
+        <input type="submit" value="Save" />
+        
+    </form>
+{% endblock %}

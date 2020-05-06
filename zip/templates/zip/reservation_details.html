@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% if user.is_authenticated %}
+
+{% block content %}
+{% for message in messages %}
+{# Show Error Message #}
+<div class="alert alert-success">
+    <a class="close" href="#" data-dismiss="alert">×</a>
+    {{ message }}
+</div>
+{% endfor %}
+{% for reservation in reservations %}
+        <div class="jumbotron border border-secondary" style="dow: 10px 14px 18px 10px rgba(0,0,0,0.2); margin: 30px; background-color: rgba(255,255,255,0.9);">
+
+  <h2 class="display-4">{{ reservation.user }} , {{ reservation.vehicle }}</h2>
+    <p class="lead"><b>Reservation Time</b> : {{ reservation.reservation_datetime }}</p>
+    <p class="lead"><b>Return Time</b> : {{ reservation.return_datetime }}</p>
+
+    {% if reservation.actual_returntime %}
+     <p class="lead"><b>Actual Return Time</b> : {{ reservation.actual_returntime }}</p>
+    {% endif %}
+
+
+  <hr class="my-4">
+    {% if reservation.reservation_status == "BKD" %}
+        <a type="button" class="btn btn-primary btn-lg " href="cancel/{{ reservation.id }}"> cancel</a>
+    {% elif reservation.reservation_status == "RNT" %}
+        <a type="button" class="btn btn-primary btn-lg" href="car_return_form/{{ reservation.id }}/{{ reservation.vin_no }}"> return</a>
+    {% endif %}
+
+</div>
+    {% endfor %}
+{% endblock content %}
+
+{% else %}
+<p>please log in for better experience</p>
+{% endif %}
+

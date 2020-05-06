@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% if user.is_authenticated %}
+
+{% block content %}
+{% for message in messages %}
+{# Show Error Message #}
+<div class="alert alert-success">
+    <a class="close" href="#" data-dismiss="alert">×</a>
+    {{ message }}
+</div>
+{% endfor %}
+
+{% for vehicle in vehicles %}
+    <div >
+    <div class="card border border-secondary" style="border-radius: 5px; box-shadow: 10px 14px 18px 10px rgba(0,0,0,0.2); margin: 30px; background-color: rgba(255,255,255,0.9);">
+        <h5 class="card-header" style="font-size: 2.5em"><em>{{ vehicle.make_model }}</em></h5>
+      <div class="card-body">
+          <h3 class="card-title"> <b>current_mileage : </b>{{ vehicle.current_mileage }} </h3>
+          <h4> <b>last_service_time:</b> {{ vehicle.last_service_time }} </h4>
+          <h4> <b>rental_location:</b> {{ vehicle.rental_location }}</h4>
+          <h5> <b>vin_no:</b> {{ vehicle.vin_no}}</h5>
+          <a href="/car_request_form/{{ vehicle.make_model }}/{{ vehicle.vin_no }}/{{ vehicle.rental_location }}" class="btn btn-primary">Request</a>
+      </div>
+    </div>
+    </div>
+{% endfor %}
+{% endblock content %}
+
+{% else %}
+<p>please log in for better experiance</p>
+{% endif %}

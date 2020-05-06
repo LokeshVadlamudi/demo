@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block block_body  %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="jumbotron border border-secondary"
+        style="dow: 10px 14px 18px 10px rgba(0,0,0,0.2); margin: 30px; background-color: rgba(255,255,255,0.9);">
+                <h1>Profile</h1>
+                <h4> <b>Username: </b>{{ user.username }}</h4>
+                <h4> <b>Email Address: </b> {{ user.email }}</h4>
+                <h4> <b>First Name: </b> {{ customer.first_name }}</h4>
+                <h4> <b>Last Name: </b> {{ customer.last_name }}</h4>
+                <h4> <b>Driving License Number: </b> {{ customer.driving_license_no }}</h4>
+                <h4> <b>Credit Card Holder Name: </b> {{ customer.cc_holder_name }}</h4>
+                <h4> <b>Card Number: </b> {{ customer.cc_number }}</h4>
+                <h4> <b>Expiration Date: </b> {{ customer.cc_expiry }}</h4>
+                <h4> <b>Security Code: </b> {{ customer.cc_code }}</h4>
+        <br/>
+        <a href='/profile/edit' class="btn btn-primary">Edit</a>
+    </div>
+</div>
+{% else %}
+<p>please log in for better experiance</p>
+{% endif %}
+{% endblock %}

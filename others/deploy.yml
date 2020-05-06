@@ -1,0 +1,40 @@
+---
+
+- name: Deploy Playbook for Flask Server
+  hosts: all
+  tasks:
+    
+    - name: Installing flask and related dependencies
+      become: yes
+      pip:
+        name: 
+          - pymongo
+          - flask
+          - flask_swagger_ui
+          - flask_cors
+
+      environment: 
+        PATH: /usr/local/bin:{{ ansible_env.PATH }}
+    
+
+    - name: Create content directory on host
+      become: yes
+      file:
+        path: /opt/sse
+        state: directory
+        mode: '0644'
+
+
+    - name: Copy app server content
+      become: yes
+      copy:
+        src: /Users/rahuly/OurZipCar/sp20-cmpe-202-sec-49-team-project-fourreal
+        dest: /opt/sse
+
+
+        
+    - name: Start webserver after changing directory
+      become: yes
+      shell: nohup python apis.py </dev/null >server.log 2>&1 &
+      args:
+        chdir: /opt/sse/sp20-cmpe-202-sec-49-team-project-fourreal

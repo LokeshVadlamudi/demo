@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% if user.is_authenticated %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron border border-secondary" style="dow: 10px 14px 18px 10px rgba(0,0,0,0.2); margin: 30px; background-color: rgba(255,255,255,0.9);">
+
+            <h2>{{ reservation.user }}</h2>
+            <h4>{{ reservation.vehicle }}</h4>
+            <h4>{{ reservation.reservation_datetime }}</h4>
+            <h4>{{ reservation.rental_location }}</h4>
+            <h4>{{ reservation.return_datetime }}</h4>
+
+            <h4>Base Charge :{{ obj.base }}</h4>
+            <h4>Advance Charge :{{ obj.advance }}</h4>
+            <h4>Late Charge :{{ obj.lateCharge }} </h4>
+            <h4>Total Charge :{{ obj.total }}</h4>
+
+    <form method="POST"> {% csrf_token %}
+     {% bootstrap_form suggestionForm %}
+
+    <input class="btn btn-primary" type="submit" value="Confirm Return" />
+    </form>
+
+
+            <h2>{{ reservation.reservation_status }}</h2>
+
+        </div>
+    </div>
+{% endblock content %}
+
+{% else %}
+<p>please log in for better experiance</p>
+{% endif %}
+
