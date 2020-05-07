@@ -7,7 +7,6 @@ from .models import Vehicle, Customer
 from django.http import HttpResponse, HttpResponseRedirect
 from . import urls
 from .forms import *
-
 from django.shortcuts import render
 
 from django.contrib.auth import authenticate, login, logout
